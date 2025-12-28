@@ -1,0 +1,21 @@
+{
+  "name": "Muhammed Afsal Ch — Web Developer",
+  "short_name": "Afsal.dev",
+  "description": "Full-stack web developer from Mundakkal, Malappuram, Kerala. Web development, e-commerce, SEO, and digital marketing.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f1724",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/afsu.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/afsu.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
