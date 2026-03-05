@@ -1,13 +1,29 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 :root {
+  /* Light theme variables */
+  --background-raw: #f8fafc;
+  --background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 60%);
+  --foreground: #0f172a;
+  --muted: #64748b;
+  --accent-start: #2563eb;
+  --accent-end: #7c3aed;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --border-color: rgba(0, 0, 0, 0.08);
+}
+
+.dark {
   /* Premium dark theme variables */
-  --background: linear-gradient(180deg, #05060b 0%, #071025 60%), radial-gradient(circle at 10% 20%, rgba(6,22,34,0.18), transparent 15%), radial-gradient(circle at 90% 80%, rgba(8,18,32,0.16), transparent 20%);
+  --background-raw: #05060b;
+  --background: linear-gradient(180deg, #05060b 0%, #071025 60%), radial-gradient(circle at 10% 20%, rgba(6, 22, 34, 0.18), transparent 15%), radial-gradient(circle at 90% 80%, rgba(8, 18, 32, 0.16), transparent 20%);
   --foreground: #e6f0fb;
   --muted: #94a3b8;
   --accent-start: #06b6d4;
   --accent-end: #3b82f6;
-  --card-bg: rgba(12,18,28,0.45);
+  --card-bg: rgba(12, 18, 28, 0.45);
+  --border-color: rgba(255, 255, 255, 0.1);
 }
 
 @theme inline {
@@ -20,9 +36,11 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
 }
 
 /* Footer tweaks for small non-tailwind fallbacks */
@@ -44,7 +62,7 @@ footer {
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--accent-start), var(--accent-end));
   border-radius: 9999px;
-  border: 3px solid rgba(2,6,17,0.6);
+  border: 3px solid rgba(2, 6, 17, 0.6);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -52,31 +70,70 @@ footer {
 }
 
 /* For Firefox */
-html, body {
+html,
+body {
   scrollbar-width: thin;
-  scrollbar-color: var(--accent-start) #071025; /* thumb, track for firefox */
+  scrollbar-color: var(--accent-start) #071025;
+  /* thumb, track for firefox */
 }
 
 /* Fallback for older browsers */
 .theme-scrollbar-track {
-  background: rgba(7,10,18,0.6);
+  background: rgba(7, 10, 18, 0.6);
 }
 
 /* Premium dark overrides to support components using light/dark utility classes */
-.premium-dark .text-white { color: var(--foreground) !important; }
-.premium-dark .text-gray-300 { color: var(--muted) !important; }
-.premium-dark .text-gray-400 { color: rgba(255,255,255,0.72) !important; }
-.premium-dark .text-gray-500 { color: rgba(255,255,255,0.6) !important; }
-.premium-dark .text-gray-600 { color: rgba(255,255,255,0.5) !important; }
+.premium-dark .text-white {
+  color: var(--foreground) !important;
+}
 
-.premium-dark .bg-gray-900 { background-color: rgba(6,10,18,0.6) !important; }
-.premium-dark .bg-gray-900\/50 { background-color: rgba(6,10,18,0.5) !important; }
-.premium-dark .bg-gray-900\/95 { background-color: rgba(6,10,18,0.95) !important; }
-.premium-dark .bg-gray-800\/30 { background-color: rgba(8,14,24,0.32) !important; }
-.premium-dark .bg-gray-800\/50 { background-color: rgba(8,14,24,0.5) !important; }
-.premium-dark .backdrop-blur-xl { backdrop-filter: blur(8px) !important; }
-.premium-dark .border-gray-800\/50 { border-color: rgba(255,255,255,0.04) !important; }
-.premium-dark .border-gray-700 { border-color: rgba(255,255,255,0.03) !important; }
+.premium-dark .text-gray-300 {
+  color: var(--muted) !important;
+}
+
+.premium-dark .text-gray-400 {
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+
+.premium-dark .text-gray-500 {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.premium-dark .text-gray-600 {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.premium-dark .bg-gray-900 {
+  background-color: rgba(6, 10, 18, 0.6) !important;
+}
+
+.premium-dark .bg-gray-900\/50 {
+  background-color: rgba(6, 10, 18, 0.5) !important;
+}
+
+.premium-dark .bg-gray-900\/95 {
+  background-color: rgba(6, 10, 18, 0.95) !important;
+}
+
+.premium-dark .bg-gray-800\/30 {
+  background-color: rgba(8, 14, 24, 0.32) !important;
+}
+
+.premium-dark .bg-gray-800\/50 {
+  background-color: rgba(8, 14, 24, 0.5) !important;
+}
+
+.premium-dark .backdrop-blur-xl {
+  backdrop-filter: blur(8px) !important;
+}
+
+.premium-dark .border-gray-800\/50 {
+  border-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+.premium-dark .border-gray-700 {
+  border-color: rgba(255, 255, 255, 0.03) !important;
+}
 
 /* Subtle noise overlay utility */
 .premium-dark::after {
@@ -88,6 +145,3 @@ html, body {
   opacity: 0.06;
   mix-blend-mode: overlay;
 }
-
-
-

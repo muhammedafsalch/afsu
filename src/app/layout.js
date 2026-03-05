@@ -1,6 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import { ThemeProvider } from "../components/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,62 +15,99 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Muhammed Afsal Ch — Web Developer",
-  description: "Muhammed Afsal Ch — Full-stack web developer from Mundakkal, Malappuram, Kerala. Specializes in web development, e-commerce, SEO, and digital marketing.",
+  title: "Muhammed Afsal Ch — Full Stack Developer & UI Architect",
+  description: "Muhammed Afsal Ch is a premium Full-stack web developer from Mundakkal, Malappuram, Kerala. Specializing in Next.js, React, Node.js, and high-performance digital solutions for global clients.",
+  keywords: ["Muhammed Afsal Ch", "Full Stack Developer", "Web Architect", "Next.js Expert", "React Developer", "UI/UX Designer", "MERN Stack", "Kerala Web Developer", "Malappuram Developer", "Mundakkal", "Freelance Developer India"],
+  authors: [{ name: "Muhammed Afsal Ch" }],
+  creator: "Muhammed Afsal Ch",
+  publisher: "Muhammed Afsal Ch",
+  formatDetection: {
+    email: false,
+    address: true,
+    telephone: true,
+  },
   openGraph: {
-    title: 'Muhammed Afsal Ch — Web Developer',
-    description: 'Full-stack web developer from Mundakkal, Malappuram, Kerala. Web development, e-commerce, SEO, and digital marketing.',
-    url: 'https://your-domain.com',
-    siteName: 'Afsal.dev',
+    title: 'Muhammed Afsal Ch — Full Stack Developer & UI Architect',
+    description: 'Engineering premium digital experiences with Next.js, React, and modern tech stacks. Discover the portfolio of Muhammed Afsal Ch.',
+    url: 'https://afsu.dev',
+    siteName: 'Muhammed Afsal Ch Portfolio',
     images: [
       {
-        url: 'https://your-domain.com/afsu.png',
+        url: '/projects/afsal.png',
         width: 1200,
         height: 630,
-        alt: 'Muhammed Afsal Ch'
+        alt: 'Muhammed Afsal Ch - Full Stack Developer'
       }
     ],
+    locale: 'en_US',
     type: 'website'
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Muhammed Afsal Ch — Web Developer',
-    description: 'Full-stack web developer from Mundakkal, Malappuram, Kerala.'
+    title: 'Muhammed Afsal Ch — Full Stack Developer & UI Architect',
+    description: 'Engineering premium digital experiences with Next.js, React, and modern tech stacks.',
+    creator: '@afsu_dev',
+    images: ['/projects/afsal.png'],
   },
   alternates: {
-    canonical: 'https://your-domain.com'
-  }
+    canonical: 'https://afsu.dev'
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen premium-dark`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          <main className="flex flex-col min-h-screen">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
         <script type="application/ld+json">
           {`{
             "@context": "https://schema.org",
             "@type": "Person",
             "name": "Muhammed Afsal Ch",
-            "url": "https://your-domain.com",
+            "url": "https://afsu.dev",
+            "image": "https://afsu.dev/projects/afsal.png",
             "sameAs": [
-              "https://github.com/yourprofile",
-              "https://www.linkedin.com/in/yourprofile"
+              "https://github.com/muhammedafsalch",
+              "https://www.linkedin.com/in/muhammedafsalch",
+              "https://twitter.com/afsu_dev",
+              "https://wa.me/919645917277"
             ],
-            "jobTitle": "Full-stack Web Developer",
+            "jobTitle": "Full Stack Developer & UI Architect",
             "worksFor": {
               "@type": "Organization",
-              "name": "Afsal.dev"
+              "name": "Freelance"
             },
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Mundakkal",
               "addressRegion": "Malappuram",
               "addressCountry": "IN"
-            }
+            },
+            "description": "Premium Full-stack web developer specializing in Next.js, React, and Node.js."
           }`}
         </script>
       </body>
